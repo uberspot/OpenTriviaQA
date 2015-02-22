@@ -5,7 +5,7 @@ A creative commons dataset of trivia, multiple choice questions and answers.
 url: [https://github.com/uberspot/OpenTriviaQA](https://github.com/uberspot/OpenTriviaQA)
 
 I searched around some years ago and couldn't find any publicly available dataset of trivia questions so some were 
-gathered and split in categories for public usage.
+gathered and split a bit crudely in categories for public usage.
 
 The general format of the files is:
 
@@ -14,7 +14,9 @@ The general format of the files is:
     A multiple choice answer 1
     B multiple choice answer 2
     C multiple choice answer 3
-    D multiple choice answer 4
+    D ....
+    E ...
+    .....
 
 A better format could be used in retrospect but a) this one is easy for humans to edit and change questions b) it can be
 parsed fairly easy to json or something different later on.
