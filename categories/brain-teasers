@@ -416,13 +416,6 @@ B Africa
 C Asia
 D Europe
 
-#Q There are M blue and N red marbles in one box. One marble is chosen randomly and it is put back in the box, together with K other marbles of the same color. Then a second marble is chosen. What is the possibility that the second marble is red, considering that the first one was blue?
-^ 
-A (M+K):(M+N+K)
-B M:(M+N)
-C N:(M+N+K)
-D M:(M+N-K)
-
 #Q One kid has a toy car with a strange remote control- it has only one button on it. When the car is switched on, it starts moving forward and doesnt stop until its switched off. When the boy presses the button, the car makes a 60 degree turn clockwise. Considering that this is a very lazy boy, try calculating the smallest number of times he has to press the button so that the car travels back to him.
 ^ 5
 A 4
