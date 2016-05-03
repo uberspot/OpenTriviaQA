@@ -20,7 +20,7 @@ File.readlines(ARGV[0]).each do |line|
     question[:question] = line[3..-1]
   elsif line.start_with?('^ ')
     question[:answer] = line[2..-1]
-  elsif ['A ','B ','C ','D '].include?(line[0..1])
+  elsif ('A '..'Z ').include?(line[0..1])
     question[:choices] ||= []
     question[:choices] << line[2..-1]
   elsif line.empty?
