@@ -19,6 +19,10 @@
 
 require 'json'
 
+def stripAndEncode(str)
+  return str.strip!.force_encoding('ISO-8859-1').encode('UTF-8')
+end
+
 ARGV.each do |file|
   if File.directory?(file)
     puts "#{file} is a directory. Skipping."
@@ -28,20 +32,31 @@ ARGV.each do |file|
   questions = []
   question = {}
 
-  File.readlines(file).each do |line|
-    line = line.strip!.force_encoding('ISO-8859-1').encode('UTF-8')
-    if line.start_with?('#Q ')
-      question[:question] = line[3..-1]
-    elsif line.start_with?('^ ')
-      question[:answer] = line[2..-1]
-    elsif ('A '..'Z ').include?(line[0..1])
-      question[:choices] ||= []
-      question[:choices] << line[2..-1]
-    elsif line.empty?
-      questions << question unless question.empty?
-      question = {}
+  File.open(file, "r") do |fh|
+    while(line = fh.gets) != nil
+      line = stripAndEncode(line)
+      if line.start_with?('#Q ')
+        question[:question] = line[3..-1]
+        until (line = fh.gets) == nil || line.start_with?('^ ') do
+          line = stripAndEncode(line)
+          question[:question] << "\n"
+          question[:question] << line
+        end
+        line = stripAndEncode(line)
+      end
+
+      if line.start_with?('^ ')
+        question[:answer] = line[2..-1]
+      elsif ('A '..'Z ').include?(line[0..1])
+        question[:choices] ||= []
+        question[:choices] << line[2..-1]
+      elsif line.empty?
+        questions << question unless question.empty?
+        question = {}
+      end
     end
   end
 
   File.write("#{file}.json", questions.to_json)
 end
+
