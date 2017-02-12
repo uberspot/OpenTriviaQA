@@ -18,6 +18,7 @@
 # ruby converter.rb folder/*
 
 require 'json'
+require 'pathname'
 
 def stripAndEncode(str)
   return str.strip!.force_encoding('ISO-8859-1').encode('UTF-8')
@@ -37,6 +38,7 @@ ARGV.each do |file|
       line = stripAndEncode(line)
       if line.start_with?('#Q ')
         question[:question] = line[3..-1]
+        question[:category] = Pathname.new(file).basename
         until (line = fh.gets) == nil || line.start_with?('^ ') do
           line = stripAndEncode(line)
           question[:question] << "\n"
